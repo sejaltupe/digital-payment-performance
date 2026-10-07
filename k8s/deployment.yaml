@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: payment-app
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: payment-app
+
+  template:
+    metadata:
+      labels:
+        app: payment-app
+
+    spec:
+      containers:
+        - name: payment-app
+          image: digital-payment-app:latest
+
+          ports:
+            - containerPort: 5000
+
+          imagePullPolicy: IfNotPresent
