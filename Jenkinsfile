@@ -21,18 +21,18 @@ pipeline {
             }
         }
 
-        stage('Deploy to Kubernetes') {
-            steps {
-                bat 'kubectl apply -f k8s/deployment.yaml'
-                bat 'kubectl apply -f k8s/service.yaml'
-            }
-        }
+       stage('Deploy to Kubernetes') {
+    steps {
+        bat 'set KUBECONFIG=C:\\ProgramData\\Jenkins\\.kube\\config && kubectl apply -f k8s/deployment.yaml'
+        bat 'set KUBECONFIG=C:\\ProgramData\\Jenkins\\.kube\\config && kubectl apply -f k8s/service.yaml'
+    }
+}
 
         stage('Check Deployment') {
-            steps {
-                bat 'kubectl get pods'
-                bat 'kubectl get services'
-            }
-        }
+    steps {
+        bat 'set KUBECONFIG=C:\\ProgramData\\Jenkins\\.kube\\config && kubectl get pods'
+        bat 'set KUBECONFIG=C:\\ProgramData\\Jenkins\\.kube\\config && kubectl get services'
+    }
+}
     }
 }
